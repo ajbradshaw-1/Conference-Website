@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavity Control of Quantum Materials — October 15–17, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1A2330;
+    --navy-deep:#141B26;
+    --accent:#4A7194;
+    --accent-dark:#3A5A78;
+    --ink:#2B3440;
+    --muted:#69737F;
+    --rule:#E3E7EC;
+    --panel:#F6F8FA;
+    --bg:#FFFFFF;
+    --max:880px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Source Sans 3",-apple-system,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);background:var(--bg);
+    font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- header bar ---------- */
+  .topbar{
+    background:var(--navy);
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .topbar-inner{
+    max-width:1100px;margin:0 auto;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:0 20px;min-height:54px;
+  }
+  .brand{
+    color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+    letter-spacing:.04em;padding:14px 0;white-space:nowrap;
+  }
+  .brand span{color:#8FA9C0;font-weight:300}
+  nav.main{display:flex;flex-wrap:wrap;gap:2px}
+  nav.main a{
+    color:#C7D2DC;text-decoration:none;font-size:14.5px;font-weight:400;
+    padding:16px 13px;letter-spacing:.02em;border-bottom:3px solid transparent;
+    transition:color .15s,border-color .15s;
+  }
+  nav.main a:hover{color:#fff}
+  nav.main a.active{color:#fff;border-bottom-color:var(--accent)}
+  nav.main a:focus-visible,.brand:focus-visible{outline:2px solid #8FB3D1;outline-offset:-2px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;background:var(--navy-deep);
+    min-height:240px;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;text-align:center;
+  }
+  .hero.tall{min-height:320px}
+  .hero svg.banner{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-content{position:relative;z-index:2;padding:48px 24px;max-width:900px}
+  .hero h1{
+    color:#fff;font-weight:200;letter-spacing:.045em;
+    font-size:clamp(28px,4.6vw,46px);line-height:1.2;
+  }
+  .hero .sub{
+    color:#B9C7D4;font-weight:300;font-size:clamp(15px,2vw,19px);
+    letter-spacing:.12em;text-transform:uppercase;margin-top:14px;
+  }
+  .hero .sub .dot{color:var(--accent);padding:0 8px}
+
+  /* ---------- page body ---------- */
+  main{max-width:var(--max);margin:0 auto;padding:48px 24px 80px}
+  h2{
+    color:var(--accent-dark);font-weight:600;font-size:22px;letter-spacing:.01em;
+    margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+  }
+  main > section:first-child h2:first-child, main h2:first-child{margin-top:0}
+  h3{font-weight:600;font-size:17.5px;margin:26px 0 8px;color:var(--ink)}
+  p{margin:0 0 14px;max-width:72ch}
+  a{color:var(--accent)}
+  a:hover{color:var(--accent-dark)}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+  ul{margin:0 0 16px 22px}
+  li{margin:5px 0}
+  li::marker{color:var(--accent)}
+  .lede{font-size:19px;font-weight:300;line-height:1.65;color:#3A4450}
+  .small{font-size:14.5px;color:var(--muted)}
+  .note{
+    font-size:14.5px;color:var(--muted);background:var(--panel);
+    border-left:3px solid var(--accent);padding:10px 14px;margin:18px 0;
+  }
+  .tba{
+    display:inline-block;font-size:12px;font-weight:600;letter-spacing:.08em;
+    color:var(--accent-dark);background:#EBF1F6;border:1px solid #D4E0EA;
+    border-radius:3px;padding:0 7px;vertical-align:1px;text-transform:uppercase;
+  }
+  /* .tba variant for dark topbar (used by the working-title "Placeholder" pill) */
+  .topbar .tba{color:#C7D2DC;background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22);font-size:10.5px;vertical-align:2px}
+
+  /* at-a-glance */
+  .glance{
+    background:var(--panel);border:1px solid var(--rule);border-radius:4px;
+    padding:22px 26px;margin:8px 0 10px;
+  }
+  .glance dl{display:grid;grid-template-columns:130px 1fr;row-gap:9px;column-gap:18px}
+  .glance dt{font-weight:600;color:var(--accent-dark);font-size:15px;letter-spacing:.02em}
+  .glance dd{margin:0;font-size:16px}
+  @media (max-width:560px){.glance dl{grid-template-columns:1fr}.glance dt{margin-top:6px}}
+
+  /* schedule tables */
+  table.sched{width:100%;border-collapse:collapse;margin:6px 0 30px;font-size:15.5px}
+  table.sched caption{
+    text-align:left;font-weight:600;font-size:18px;color:var(--ink);
+    padding:0 0 10px;letter-spacing:.01em;
+  }
+  table.sched caption .day{color:var(--accent-dark)}
+  table.sched th{
+    text-align:left;font-size:12.5px;font-weight:600;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted);
+    border-bottom:2px solid var(--navy);padding:6px 10px;
+  }
+  table.sched td{border-bottom:1px solid var(--rule);padding:9px 10px;vertical-align:top}
+  table.sched td.time{
+    white-space:nowrap;width:165px;color:var(--accent-dark);
+    font-variant-numeric:tabular-nums;font-weight:600;font-size:14.5px;
+  }
+  tr.sesshead td{font-weight:600;background:#F2F5F8;color:var(--ink)}
+  tr.talk td.item{padding-left:26px}
+  tr.talk td.time{font-weight:400;color:var(--muted)}
+  tr.break td{color:var(--muted);background:#FAFBFC}
+  tr.discuss td{background:#EFF4F8}
+  tr.social td{background:#FAFBFC}
+  .talks{color:var(--muted);font-size:14px;display:block;margin-top:2px}
+  @media (max-width:560px){
+    table.sched td.time{width:auto;font-size:13.5px}
+    table.sched{font-size:14.5px}
+  }
+
+  /* speakers */
+  ol.speakers{list-style:none;margin:10px 0 0;padding:0;columns:2;column-gap:48px}
+  ol.speakers li{
+    break-inside:avoid;border-bottom:1px solid var(--rule);
+    padding:10px 2px;margin:0;
+  }
+  ol.speakers .aff{display:block;font-size:14.5px;color:var(--muted)}
+  @media (max-width:640px){ol.speakers{columns:1}}
+
+  /* sponsors */
+  .sponsor-primary{
+    border:1px solid var(--rule);border-top:4px solid var(--accent);
+    border-radius:4px;padding:34px 30px;text-align:center;margin:14px 0 26px;
+    background:var(--panel);
+  }
+  .sponsor-primary .mark{
+    font-weight:200;font-size:clamp(24px,3.4vw,34px);letter-spacing:.03em;
+    color:var(--navy);line-height:1.25;
+  }
+  .sponsor-primary .role{
+    font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-dark);margin-bottom:12px;
+  }
+  .sponsor-primary img.logo{max-width:340px;width:78%;height:auto;display:block;margin:0 auto}
+  .cell img.logo{max-width:190px;max-height:52px;width:auto;height:auto}
+  .mark-fallback{display:none}
+  .map-embed{width:100%;height:380px;border:1px solid var(--rule);border-radius:4px;display:block;margin:10px 0 6px}
+  .sponsor-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;margin:8px 0 10px;
+  }
+  .sponsor-row .cell{
+    border:1px solid var(--rule);border-radius:4px;padding:24px 16px;
+    text-align:center;font-weight:300;font-size:17px;color:#3A4450;
+    display:flex;align-items:center;justify-content:center;min-height:92px;
+    line-height:1.35;
+  }
+  .sponsor-home{display:flex;flex-wrap:wrap;align-items:stretch;gap:14px;margin-top:10px}
+
+  /* history */
+  .edition{
+    border:1px dashed #CBD5DE;border-radius:4px;padding:20px 24px;margin:14px 0;
+    color:var(--muted);
+  }
+  .edition .yr{font-weight:600;color:var(--accent-dark);font-size:15px;letter-spacing:.06em}
+
+  footer{
+    border-top:1px solid var(--rule);background:var(--panel);
+    padding:28px 24px;font-size:14px;color:var(--muted);
+  }
+  .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
+
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 22px}
+  .btn{
+    display:inline-block;font-size:14px;font-weight:600;letter-spacing:.03em;
+    color:var(--accent-dark);border:1px solid #C9D7E2;border-radius:3px;
+    padding:7px 14px;text-decoration:none;background:#fff;cursor:pointer;
+    font-family:inherit;
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent-dark)}
+
+  @media (prefers-reduced-motion:no-preference){
+    .hero-content{animation:rise .5s ease-out both}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  }
+
+  /* ---------- print (schedule-friendly) ---------- */
+  @media print{
+    .topbar,footer,.actions,.map-embed{display:none}
+    .hero{min-height:0;background:#fff}
+    .hero svg.banner{display:none}
+    .hero h1,.hero .sub{color:#000}
+    .hero-content{padding:0 0 12px}
+    main{padding:0;max-width:100%}
+    table.sched{page-break-inside:avoid;font-size:12px}
+    a{color:#000;text-decoration:none}
+    body{font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <!-- NOTE: "Cavity QED × Quantum Materials" / "Cavity Control of Quantum Materials"
+         is a WORKING PLACEHOLDER title inferred from the project brief, NOT a confirmed
+         conference name. Pending PI confirmation. When the real name lands: update the
+         brand text below, the heroBlocks.home <h1>, the `titles` object, the <title> tag,
+         and the footer — then delete the .tba "Placeholder" pill on the next line. -->
+    <a class="brand" href="#/home">Cavity QED <span>×</span> Quantum Materials <span>· 2026</span> <span class="tba">Placeholder</span></a>
+    <nav class="main" aria-label="Primary">
+      <a href="#/home" data-page="home">Home</a>
+      <a href="#/schedule" data-page="schedule">Schedule &amp; Program</a>
+      <a href="#/speakers" data-page="speakers">Speakers</a>
+      <a href="#/travel" data-page="travel">Travel &amp; Local Info</a>
+      <a href="#/sponsors" data-page="sponsors">Sponsors</a>
+      <a href="#/history" data-page="history">Conference History</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="hero">
+  <!-- Geometric origami banner — identical on every page; only the title changes -->
+  <svg class="banner" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#121925"/><stop offset="1" stop-color="#1B2736"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="320" fill="url(#bg)"/>
+    <g stroke="#0E141D" stroke-width="1">
+      <polygon points="0,0 210,0 90,170 0,120" fill="#18222F"/>
+      <polygon points="210,0 420,0 300,140 90,170" fill="#1E2A3A"/>
+      <polygon points="420,0 640,0 520,120 300,140" fill="#16202C"/>
+      <polygon points="640,0 880,0 760,150 520,120" fill="#1C2836"/>
+      <polygon points="880,0 1080,0 990,130 760,150" fill="#212F41"/>
+      <polygon points="1080,0 1200,0 1200,110 990,130" fill="#192431"/>
+      <polygon points="0,120 90,170 40,320 0,320" fill="#1F2C3C"/>
+      <polygon points="90,170 300,140 230,320 40,320" fill="#16202C"/>
+      <polygon points="300,140 520,120 450,320 230,320" fill="#22324A"/>
+      <polygon points="520,120 760,150 660,320 450,320" fill="#192431"/>
+      <polygon points="760,150 990,130 900,320 660,320" fill="#1E2A3A"/>
+      <polygon points="990,130 1200,110 1200,320 900,320" fill="#15202B"/>
+      <polygon points="300,140 450,320 230,320" fill="#2A3D58" opacity=".55"/>
+      <polygon points="760,150 900,320 820,320" fill="#2C415E" opacity=".4"/>
+      <polygon points="640,0 760,150 520,120" fill="#243650" opacity=".45"/>
+    </g>
+    <g stroke="#4A7194" stroke-opacity=".28" stroke-width="1" fill="none">
+      <path d="M90,170 L300,140 L520,120 L760,150 L990,130"/>
+    </g>
+  </svg>
+  <div class="hero-content" id="hero-content"><!-- injected --></div>
+</div>
+
+<main id="page"><!-- injected --></main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Workshop on Cavity Control of Quantum Materials · October 15–17, 2026 · Hyde Park Labs, Chicago</div>
+    <div>Supported by the Gordon and Betty Moore Foundation</div>
+  </div>
+</footer>
+
+<script>
+const TBA = '<span class="tba">TBA</span>';
+
+/* ---------------- page content ---------------- */
+
+const heroBlocks = {
+  /* WORKING PLACEHOLDER TITLE — "Cavity Control of Quantum Materials" was inferred
+     from the brief's scientific scope; the real conference name is TBD per the PI.
+     Swap the <h1> below (and brand / titles / footer) when confirmed. */
+  home: `
+    <h1>Cavity Control of Quantum Materials</h1>
+    <div class="sub">October 15–17, 2026 <span class="dot">·</span> Hyde Park Labs <span class="dot">·</span> Chicago, IL</div>`,
+  schedule: `<h1>Schedule &amp; Program</h1>
+    <div class="sub">October 15–17, 2026</div>`,
+  speakers: `<h1>Invited Speakers</h1>`,
+  travel: `<h1>Travel &amp; Local Information</h1>`,
+  sponsors: `<h1>Sponsors</h1>`,
+  history: `<h1>Conference History</h1>`
+};
+
+const pages = {
+
+/* ------------ HOME ------------ */
+home: `
+  <p class="lede">A small invitation-only workshop bringing together leading contributors
+  to the rapidly emerging field of cavity quantum electrodynamics in quantum materials.
+  Three days of invited talks and discussion sessions focused on cavity control of
+  correlated electron states — superconductivity, density-wave phases, and topological order.</p>
+
+  <h2>At a Glance</h2>
+  <div class="glance">
+    <dl>
+      <dt>Dates</dt><dd>October 15–17, 2026 (Thursday–Saturday)</dd>
+      <dt>Venue</dt><dd>Hyde Park Labs, Chicago, IL</dd>
+      <dt>Hotel</dt><dd>Hyatt Place Chicago-South / University Medical Center</dd>
+      <dt>Format</dt><dd>Invited talks (25 min + 5 min Q&amp;A); two discussion sessions</dd>
+      <dt>Attendance</dt><dd>Invitation only</dd>
+    </dl>
+  </div>
+
+  <h2>Confirmed Invited Speakers</h2>
+  <p>Dmitri Basov · Silke Bühler-Paschen · Andrea Cavalleri · Hui Deng · Ankit Disa ·
+  Alejandro Fainstein · Jérôme Faist · Valla Fatemi · Daniele Fausti · Nuh Gedik ·
+  Tony Heinz · Jonathan Keeling · Jun Kono · Frank Koppens · Benjamin Lev ·
+  Peter Littlewood · James McIver · Vinod Menon · Prineha Narang · Angel Rubio ·
+  Qimiao Si · Shuolong Yang · Tian Zhong</p>
+  <p class="small">Working invitation list — names may change before the program is final.
+  Affiliations on the <a href="#/speakers">Speakers</a> page.</p>
+
+  <h2>Organizing Committee</h2>
+  <p>Hosted by Prof. Shuolong Yang, Pritzker School of Molecular Engineering,
+  The University of Chicago. Full committee listing to follow. ${TBA}</p>
+
+  <h2>Sponsors</h2>
+  <!-- LOGO LICENSING — UNVERIFIED USE RIGHTS: logos sourced from Wikimedia Commons
+       pending verification. Replace with organization-supplied assets (Moore brand kit,
+       UChicago Comm Office, PME / CQI Comm offices) before publication. See the fuller
+       note on the Sponsors page template. -->
+  <div class="sponsor-primary">
+    <div class="role">Primary Sponsor</div>
+    <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Gordon_and_Betty_Moore_Foundation_logo.svg"
+         alt="Gordon and Betty Moore Foundation"
+         onerror="this.style.display='none';this.parentElement.querySelector('.mark-fallback').style.display='block'">
+    <div class="mark mark-fallback">Gordon and Betty Moore Foundation</div>
+  </div>
+  <div class="sponsor-row">
+    <div class="cell">
+      <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/University_of_Chicago_wordmark.svg"
+           alt="The University of Chicago"
+           onerror="this.style.display='none';this.parentElement.querySelector('.mark-fallback').style.display='inline'">
+      <span class="mark-fallback">The University of Chicago</span>
+    </div>
+    <div class="cell">Pritzker School of<br>Molecular Engineering</div>
+    <div class="cell">Chicago Quantum Institute</div>
+  </div>
+`,
+
+/* ------------ SCHEDULE ------------ */
+schedule: `
+  <div class="actions">
+    <button class="btn" onclick="window.print()">Print / save schedule as PDF</button>
+  </div>
+
+  <h2>Program Format</h2>
+  <!-- TALK-COUNT MATH (PI's June 8 notes): ~29 participants / 28 professors; ~26 talks
+       requested, 3 local talks (Zhong/Yang/Littlewood) wrapped into 1, and some invitees
+       may combine talks → target fits the 24 available slots = 22 numbered session slots
+       below + up to 2 lunch talks. If combining doesn't pan out, sessions 2/10 (the
+       3-talk sessions) are the natural places to extend. -->
+  <ul>
+    <li>Each invited talk: 25 minutes + 5 minutes Q&amp;A.</li>
+    <li>Two discussion sessions; topics will be finalized after talk titles are submitted.</li>
+    <li>Breakfasts, coffee breaks, and most lunches are served at Hyde Park Labs.</li>
+    <li>Day 2 lunch is at the Quad Club — a 10–15 minute scenic walk through the UChicago quads.</li>
+    <li>Day 2 dinner is at a downtown Chicago restaurant; transportation is provided.</li>
+  </ul>
+  <p class="note">Talk titles and speaker assignments will be posted as they are confirmed.
+  Numbered talks below are placeholders. Discussion-session topics are tentative and will be
+  finalized after all talk titles are submitted.</p>
+
+  <h2>Day 1 — Thursday, October 15</h2>
+  <table class="sched">
+    <thead><tr><th>Time</th><th>Program</th></tr></thead>
+    <tbody>
+      <tr class="break"><td class="time">8:00 – 8:50 am</td><td>Breakfast (Hyde Park Labs)</td></tr>
+      <!-- CONFLICT FLAG (iteration request #5 vs. original brief §9):
+           The brief's content-sensitivity rule says don't publish names until people
+           confirm and agree to be listed. The candidate names rendered in the three
+           TBA pills below (welcome remarks, concluding remarks, Day 1 dinner venue)
+           come from the PI's internal June 10 agenda and are UNCONFIRMED. Rendered
+           inline per the explicit iteration request, but REVIEW BEFORE PUBLIC LAUNCH —
+           if the site goes live before these are settled, revert each pill to plain
+           <span class="tba">TBA</span>. -->
+      <tr><td class="time">8:55 – 9:00 am</td><td>Welcome remarks — speaker <span class="tba">TBA: Nadya or David A.</span></td></tr>
+      <tr class="sesshead"><td class="time">9:00 – 10:00 am</td><td>Session 1</td></tr>
+      <tr class="talk"><td class="time">9:00 – 9:30 am</td><td class="item">Talk 1 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">9:30 – 10:00 am</td><td class="item">Talk 2 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">10:00 – 10:20 am</td><td>Coffee break</td></tr>
+      <tr class="sesshead"><td class="time">10:20 – 11:50 am</td><td>Session 2</td></tr>
+      <tr class="talk"><td class="time">10:20 – 10:50 am</td><td class="item">Talk 3 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">10:50 – 11:20 am</td><td class="item">Talk 4 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">11:20 – 11:50 am</td><td class="item">Talk 5 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">12:00 – 2:00 pm</td><td>Lunch + short break (possible lunch talk ${TBA})</td></tr>
+      <tr class="sesshead"><td class="time">2:00 – 3:00 pm</td><td>Session 3</td></tr>
+      <tr class="talk"><td class="time">2:00 – 2:30 pm</td><td class="item">Talk 6 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">2:30 – 3:00 pm</td><td class="item">Talk 7 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">3:00 – 3:20 pm</td><td>Coffee break</td></tr>
+      <tr class="sesshead"><td class="time">3:20 – 4:20 pm</td><td>Session 4</td></tr>
+      <tr class="talk"><td class="time">3:20 – 3:50 pm</td><td class="item">Talk 8 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">3:50 – 4:20 pm</td><td class="item">Talk 9 — Speaker TBA</td></tr>
+      <tr class="discuss"><td class="time">4:20 – 5:00 pm</td><td>Discussion Session 1 — Cavity control of many-body states: superconductivity, charge-density waves, Mott insulators <span class="tba">Tentative</span></td></tr>
+      <tr class="break"><td class="time">5:00 – 6:00 pm</td><td>Free time</td></tr>
+      <tr class="social"><td class="time">6:00 – 8:00 pm</td><td>Dinner — venue <span class="tba">TBA: Quad Club candidate</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Day 2 — Friday, October 16</h2>
+  <table class="sched">
+    <thead><tr><th>Time</th><th>Program</th></tr></thead>
+    <tbody>
+      <tr class="break"><td class="time">8:00 – 8:55 am</td><td>Breakfast (Hyde Park Labs)</td></tr>
+      <tr class="sesshead"><td class="time">9:00 – 10:00 am</td><td>Session 5</td></tr>
+      <tr class="talk"><td class="time">9:00 – 9:30 am</td><td class="item">Talk 10 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">9:30 – 10:00 am</td><td class="item">Talk 11 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">10:00 – 10:20 am</td><td>Coffee break</td></tr>
+      <tr class="sesshead"><td class="time">10:20 – 11:20 am</td><td>Session 6</td></tr>
+      <tr class="talk"><td class="time">10:20 – 10:50 am</td><td class="item">Talk 12 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">10:50 – 11:20 am</td><td class="item">Talk 13 — Speaker TBA</td></tr>
+      <tr class="social"><td class="time">11:30 am – 12:00 pm</td><td>Scenic walk to the Quad Club (through the UChicago quads)</td></tr>
+      <tr class="social"><td class="time">12:00 – 1:30 pm</td><td>Lunch at the Quad Club (possible lunch talk ${TBA})</td></tr>
+      <tr class="social"><td class="time">1:30 – 2:00 pm</td><td>Walk back to Hyde Park Labs</td></tr>
+      <tr class="sesshead"><td class="time">2:00 – 3:00 pm</td><td>Session 7</td></tr>
+      <tr class="talk"><td class="time">2:00 – 2:30 pm</td><td class="item">Talk 14 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">2:30 – 3:00 pm</td><td class="item">Talk 15 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">3:00 – 3:20 pm</td><td>Coffee break</td></tr>
+      <tr class="sesshead"><td class="time">3:20 – 4:20 pm</td><td>Session 8</td></tr>
+      <tr class="talk"><td class="time">3:20 – 3:50 pm</td><td class="item">Talk 16 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">3:50 – 4:20 pm</td><td class="item">Talk 17 — Speaker TBA</td></tr>
+      <tr class="discuss"><td class="time">4:20 – 5:00 pm</td><td>Discussion Session 2 — Cavity control of topology <span class="tba">Tentative</span></td></tr>
+      <tr class="social"><td class="time">5:00 – 6:30 pm</td><td>Transportation to downtown Chicago</td></tr>
+      <tr class="social"><td class="time">6:30 – 9:00 pm</td><td>Workshop dinner — downtown restaurant ${TBA} (group photo)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Day 3 — Saturday, October 17</h2>
+  <table class="sched">
+    <thead><tr><th>Time</th><th>Program</th></tr></thead>
+    <tbody>
+      <tr class="break"><td class="time">8:00 – 8:55 am</td><td>Breakfast (Hyde Park Labs)</td></tr>
+      <tr class="sesshead"><td class="time">9:00 – 10:00 am</td><td>Session 9</td></tr>
+      <tr class="talk"><td class="time">9:00 – 9:30 am</td><td class="item">Talk 18 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">9:30 – 10:00 am</td><td class="item">Talk 19 — Speaker TBA</td></tr>
+      <tr class="break"><td class="time">10:00 – 10:20 am</td><td>Coffee break</td></tr>
+      <tr class="sesshead"><td class="time">10:20 – 11:50 am</td><td>Session 10</td></tr>
+      <tr class="talk"><td class="time">10:20 – 10:50 am</td><td class="item">Talk 20 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">10:50 – 11:20 am</td><td class="item">Talk 21 — Speaker TBA</td></tr>
+      <tr class="talk"><td class="time">11:20 – 11:50 am</td><td class="item">Talk 22 — Speaker TBA</td></tr>
+      <!-- Unconfirmed candidates from PI's June 10 agenda — see conflict flag in Day 1 table -->
+      <tr><td class="time">11:50 am – 12:00 pm</td><td>Concluding remarks — speaker <span class="tba">TBA: Dusan, Tian, or Shuolong</span></td></tr>
+      <tr class="social"><td class="time">12:00 pm</td><td>Box lunch + departure</td></tr>
+    </tbody>
+  </table>
+`,
+
+/* ------------ SPEAKERS ------------ */
+speakers: `
+  <p class="lede">Invited speakers, listed alphabetically with affiliations.</p>
+  <p class="note">The list below is a working invitation list. Individual speakers will
+  move from draft to confirmed as invitations are accepted; some names may change before
+  the program is final. Affiliations may be updated.</p>
+
+  <!-- Remove the [Draft] pill below once the speaker list is locked and cleared for publication -->
+  <h2>Confirmed Speakers <span class="tba">Draft</span></h2>
+  <ol class="speakers">
+    <li>Dmitri Basov<span class="aff">Columbia University</span></li>
+    <li>Silke Bühler-Paschen<span class="aff">TU Wien</span></li>
+    <li>Andrea Cavalleri<span class="aff">Max Planck Institute for the Structure and Dynamics of Matter / University of Oxford</span></li>
+    <li>Hui Deng<span class="aff">University of Michigan</span></li>
+    <li>Ankit Disa<span class="aff">Cornell University</span></li>
+    <li>Alejandro Fainstein<span class="aff">Instituto Balseiro &amp; Centro Atómico Bariloche</span></li>
+    <li>Jérôme Faist<span class="aff">ETH Zürich</span></li>
+    <li>Valla Fatemi<span class="aff">Cornell University</span></li>
+    <li>Daniele Fausti<span class="aff">Friedrich-Alexander-Universität Erlangen-Nürnberg</span></li>
+    <li>Nuh Gedik<span class="aff">Massachusetts Institute of Technology</span></li>
+    <li>Tony Heinz<span class="aff">Stanford University</span></li>
+    <li>Jonathan Keeling<span class="aff">University of St Andrews</span></li>
+    <li>Jun Kono<span class="aff">Rice University</span></li>
+    <li>Frank Koppens<span class="aff">ICFO — The Institute of Photonic Sciences</span></li>
+    <li>Benjamin Lev<span class="aff">Stanford University</span></li>
+    <li>Peter Littlewood<span class="aff">The University of Chicago</span></li>
+    <li>James McIver<span class="aff">Columbia University</span></li>
+    <li>Vinod Menon<span class="aff">City College of New York, CUNY</span></li>
+    <li>Prineha Narang<span class="aff">University of California, Los Angeles</span></li>
+    <li>Angel Rubio<span class="aff">Max Planck Institute for the Structure and Dynamics of Matter</span></li>
+    <li>Qimiao Si<span class="aff">Rice University</span></li>
+    <li>Shuolong Yang<span class="aff">The University of Chicago</span></li>
+    <li>Tian Zhong<span class="aff">The University of Chicago</span></li>
+  </ol>
+`,
+
+/* ------------ TRAVEL ------------ */
+travel: `
+  <h2>Venue</h2>
+  <!-- VENUE DISCREPANCY FLAG: PI's June 8 meeting notes said the main conference is
+       "in 53rd Street Hyatt Hotel"; the June 10 agenda and project brief both say
+       Hyde Park Labs (with a to-do to reserve it). Rendering the more recent info
+       (Hyde Park Labs) — CONFIRM with PI before launch. -->
+  <p><strong>Hyde Park Labs</strong>, 5305 S Harper Court ${TBA}, Chicago, IL 60615.<br>
+  Modern conference facilities affiliated with the University of Chicago and the
+  Pritzker School of Molecular Engineering, within walking distance of the workshop
+  hotel and the UChicago campus.
+  <a href="https://maps.google.com/?q=5305+S+Harper+Ct,+Chicago,+IL+60615" target="_blank" rel="noopener">View on Google Maps</a></p>
+
+  <h2>Hotels</h2>
+  <p><strong>Hyatt Place Chicago-South / University Medical Center</strong> (conference hotel)<br>
+  5225 South Harper Avenue, Chicago, IL 60615 — approximately one block from the venue.
+  <a href="https://maps.google.com/?q=Hyatt+Place+Chicago-South+5225+S+Harper+Ave" target="_blank" rel="noopener">View on Google Maps</a></p>
+  <!-- Sophy listed as tentative alternate per PI's June 8 notes ("maybe the Sophy hotel
+       on 53rd") — confirm before launch, or delete the paragraph below. -->
+  <p><strong>Sophy Hyde Park</strong> (alternate) <span class="tba">Tentative</span><br>
+  1411 East 53rd Street, Chicago, IL 60615 — a short walk (roughly two blocks) from the venue.
+  <a href="https://maps.google.com/?q=Sophy+Hyde+Park+1411+E+53rd+St+Chicago" target="_blank" rel="noopener">View on Google Maps</a></p>
+
+  <h2>Map</h2>
+  <!-- MAP IMPLEMENTATION NOTE (multi-pin upgrade path):
+       A Google My Maps 3-pin embed (venue + hotel + Quad Club) requires someone to
+       create the map in an account, which yields an embed URL of the form:
+         https://www.google.com/maps/d/embed?mid=MAP_ID
+       That can't be generated programmatically without account friction, so per the
+       iteration criteria we keep the keyless single-pin embed + contextual paragraph.
+       TO UPGRADE: create the My Map (pins: Hyde Park Labs 5305 S Harper Ct;
+       Hyatt Place 5225 S Harper Ave; Quad Club 1155 E 57th St), set sharing to
+       "Anyone with the link", and swap the iframe src below for the /maps/d/embed URL.
+       Everything else (class, caption, print behavior) stays the same. -->
+  <iframe class="map-embed"
+    src="https://www.google.com/maps?q=5305+S+Harper+Ct,+Chicago,+IL+60615&z=16&output=embed"
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+    title="Map of Hyde Park Labs and surrounding area"></iframe>
+  <p class="small">The hotel (Hyatt Place, 5225 S Harper Ave) is one block north of the venue;
+  the Quad Club (1155 E 57th St) is a 10–15 minute walk west through campus.
+  <a href="https://maps.google.com/?q=5305+S+Harper+Ct,+Chicago,+IL+60615" target="_blank" rel="noopener">Open in Google Maps</a></p>
+
+  <h2>Getting to Hyde Park</h2>
+
+  <h3>From O'Hare International Airport (ORD)</h3>
+  <ul>
+    <li>Car / ride-share: approximately 45 minutes (longer in rush hour).</li>
+    <li>Public transit: CTA Blue Line into downtown, then Metra Electric or CTA bus to Hyde Park.</li>
+  </ul>
+
+  <h3>From Chicago Midway International Airport (MDW)</h3>
+  <ul>
+    <li>Car / ride-share: approximately 25 minutes.</li>
+    <li>Public transit: CTA Orange Line into downtown, then connecting service.</li>
+  </ul>
+
+  <h3>From downtown Chicago</h3>
+  <ul>
+    <li>Metra Electric District (from Millennium Station) to the 55th–56th–57th Street station — about 12 minutes.</li>
+    <li>CTA Bus #6 (Jackson Park Express) along the lakefront.</li>
+  </ul>
+
+  <h2>Around Hyde Park</h2>
+  <p>Hyde Park is a historic neighborhood on Chicago's South Side and home to the
+  University of Chicago. Within walking distance of the venue:</p>
+  <ul>
+    <li><strong>University of Chicago campus</strong> — gothic quads and Rockefeller Memorial Chapel.</li>
+    <li><strong>Quad Club</strong> (1155 East 57th Street) — the UChicago faculty club and the Friday lunch venue.</li>
+    <li><strong>Robie House</strong> (5757 South Woodlawn Avenue) — Frank Lloyd Wright's Prairie School landmark.</li>
+    <li><strong>Smart Museum of Art</strong> — UChicago's art museum, free admission.</li>
+    <li><strong>Promontory Point and the lakefront</strong> — accessible via the 55th Street underpass.</li>
+  </ul>
+`,
+
+/* ------------ SPONSORS ------------ */
+sponsors: `
+  <p class="lede">The workshop is generously supported by:</p>
+
+  <!-- LOGO LICENSING — UNVERIFIED USE RIGHTS:
+       Logos below are sourced from Wikimedia Commons as visual placeholders pending
+       verification of use rights. Replace with organization-supplied assets before
+       publication: Moore Foundation brand kit (via grant office, alongside required
+       acknowledgment language), UChicago Communications Office identity assets,
+       and PME / Chicago Quantum Institute communications offices.
+       Rendering is unchanged: each <img> has an onerror text fallback (.mark-fallback). -->
+  <div class="sponsor-primary">
+    <div class="role">Primary Sponsor</div>
+    <a href="https://www.moore.org" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+      <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Gordon_and_Betty_Moore_Foundation_logo.svg"
+           alt="Gordon and Betty Moore Foundation"
+           onerror="this.style.display='none';this.parentElement.querySelector('.mark-fallback').style.display='block'">
+      <div class="mark mark-fallback">Gordon and Betty Moore Foundation</div>
+    </a>
+    <p class="small" style="margin-top:14px">Acknowledgment language ${TBA}</p>
+  </div>
+
+  <div class="sponsor-row">
+    <div class="cell">
+      <a href="https://www.uchicago.edu" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/University_of_Chicago_wordmark.svg"
+             alt="The University of Chicago"
+             onerror="this.style.display='none';this.parentElement.querySelector('.mark-fallback').style.display='inline'">
+        <span class="mark-fallback">The University of Chicago</span>
+      </a>
+    </div>
+    <div class="cell"><a href="https://pme.uchicago.edu" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><!-- Replace text with <img class="logo" src="pme-logo.svg" alt="Pritzker School of Molecular Engineering"> once official asset is obtained -->Pritzker School of<br>Molecular Engineering</a></div>
+    <div class="cell"><!-- Replace text with <img class="logo" src="cqi-logo.svg" alt="Chicago Quantum Institute"> once official asset is obtained -->Chicago Quantum Institute</div>
+  </div>
+`,
+
+/* ------------ HISTORY ------------ */
+/* MODE TOGGLE — currently live: MODE A ("Previous Editions").
+   PI's June 8 notes ("Previous conference history - upload the previous 2?") indicate
+   the series DOES have two prior editions → MODE A is the confirmed direction; the
+   two cards below await year/name/host details (and possibly links/photos) from the PI.
+   MODE B ("Workshop Background" editorial framing) is retained in the comment below
+   only as a fallback if that turns out to be wrong. */
+history: `
+  <p class="lede">This workshop continues a series of meetings on cavity quantum
+  electrodynamics in quantum materials. Details of previous editions will be posted here.</p>
+
+  <h2>Previous Editions</h2>
+  <div class="edition">
+    <div class="yr">[YEAR] ${TBA}</div>
+    <p style="margin:6px 0 0">[Conference name] — [Host institution]</p>
+  </div>
+  <div class="edition">
+    <div class="yr">[YEAR] ${TBA}</div>
+    <p style="margin:6px 0 0">[Conference name] — [Host institution]</p>
+  </div>
+
+  <!-- ============ MODE B (alternative — first-edition framing) ============
+  <p class="lede">This workshop is convened at a moment of rapid growth for cavity
+  quantum electrodynamics in quantum materials.</p>
+
+  <h2>Workshop Background</h2>
+  <p>Over the past several years, the idea that the quantum fluctuations of light
+  confined in an optical cavity can reshape the ground states of solids has moved
+  from theoretical proposal to experimental frontier. Reports of cavity-modified
+  transport, metal-to-insulator transitions, and proposals for cavity-engineered
+  superconductivity and topology now appear at a pace of roughly one major result
+  per month, drawing together communities from ultrafast spectroscopy, condensed
+  matter theory, quantum optics, and materials synthesis.</p>
+  <p>This workshop gathers approximately two dozen leading contributors to that
+  emerging field for three days of invited talks and open discussion. The format
+  is deliberately small and closed-door: talks may include unpublished results,
+  and the two discussion sessions are intended to identify where cavity control
+  of correlated states — superconductivity, density waves, Mott physics — and
+  cavity-induced topology can move next.</p>
+  <p>The organizers intend this meeting to seed an ongoing series; future editions
+  will be archived on this page.</p>
+  ============ end MODE B ============ -->
+`
+};
+
+const titles = {
+  home: 'Cavity Control of Quantum Materials — October 15–17, 2026',
+  schedule: 'Schedule & Program — Cavity Control of Quantum Materials 2026',
+  speakers: 'Speakers — Cavity Control of Quantum Materials 2026',
+  travel: 'Travel & Local Info — Cavity Control of Quantum Materials 2026',
+  sponsors: 'Sponsors — Cavity Control of Quantum Materials 2026',
+  history: 'Conference History — Cavity Control of Quantum Materials 2026'
+};
+
+function render(){
+  const key = (location.hash.replace('#/','') || 'home');
+  const page = pages[key] ? key : 'home';
+  document.getElementById('hero-content').innerHTML = heroBlocks[page];
+  document.getElementById('page').innerHTML = pages[page];
+  document.getElementById('hero').classList.toggle('tall', page === 'home');
+  document.title = titles[page];
+  document.querySelectorAll('nav.main a').forEach(a=>{
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
