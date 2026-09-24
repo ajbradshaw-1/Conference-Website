@@ -23,14 +23,10 @@ Search the file for these markers:
 
 | Search for            | To update                                              |
 | --------------------- | ------------------------------------------------------ |
-| `WORKING PLACEHOLDER` | Conference name (5 spots listed in the comment)        |
-| `Speaker TBA`         | Talk assignments as titles arrive                      |
-| `Draft</span>`        | Remove pill when speaker list is locked                |
 | `LOGO LICENSING`      | Swap Wikimedia logos for official assets               |
-| `VENUE DISCREPANCY`   | Confirm Hyde Park Labs vs. Hyatt with PI               |
-| `MODE TOGGLE`         | Conference History: fill 2 prior editions (Mode A)     |
-| `CONFLICT FLAG`       | Unconfirmed remarks-speaker names — review pre-launch  |
-| `MAP IMPLEMENTATION`  | Optional 3-pin My Maps upgrade path                    |
+| `MODE TOGGLE`         | Conference History: prior editions (Mode A is live)    |
+| `${TBA}`              | Remaining TBA slots (remarks, acknowledgment text)     |
+| `VENUE PHOTOS`        | Venue photo sources, licenses, and how to swap them    |
 
 To edit: open the file in any text editor, change the text, commit on GitHub
 (the pencil icon on the file page works — no git knowledge needed). Pages
@@ -38,11 +34,17 @@ republishes automatically in ~1 minute.
 
 ## Pre-launch checklist
 
-- [ ] Confirm venue (Hyde Park Labs vs. Hyatt) — see VENUE DISCREPANCY flag
-- [ ] Real conference name in all 5 spots; remove Placeholder pill
-- [ ] Revert the 3 candidate-name TBA pills (Nadya/David A., Dusan/Tian/
-      Shuolong, Quad Club dinner) to plain TBA unless confirmed
-- [ ] Official logo files + Moore acknowledgment language from grant office
-- [ ] Speaker list cleared for publication; remove Draft pill
+- [x] Confirm venue (Hyde Park Labs)
+- [x] Real conference name in all spots; remove Placeholder pill
+- [x] Revert candidate-name TBA pills to plain TBA
+- [x] Speaker list cleared for publication; remove Draft pill
+- [x] Confirm or delete Sophy hotel listing (removed; all guests at Hyatt Place)
+- [x] Venue photos added (Wikimedia Commons + hydeparklabs.com, credited)
+- [ ] Welcome remarks speaker (David invited, awaiting confirmation)
+- [ ] Concluding remarks speaker
+- [ ] Moore acknowledgment language from grant office (Sponsors page)
+- [ ] Official logo files from Moore / UChicago / PME comms offices
+- [ ] 2025 edition dates on Conference History page
+- [ ] Official HPL meeting-space photo, if the venue provides one
 - [ ] PI eyeballs speaker affiliations
-- [x] Confirm or delete Sophy hotel listing
+- [ ] Remove "draft agenda" note from Schedule once program is final
