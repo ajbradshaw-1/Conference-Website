@@ -28,7 +28,6 @@ Search the file for these markers:
 | `Draft</span>`        | Remove pill when speaker list is locked                |
 | `LOGO LICENSING`      | Swap Wikimedia logos for official assets               |
 | `VENUE DISCREPANCY`   | Confirm Hyde Park Labs vs. Hyatt with PI               |
-| `Tentative`           | Sophy hotel + discussion topics — confirm or delete    |
 | `MODE TOGGLE`         | Conference History: fill 2 prior editions (Mode A)     |
 | `CONFLICT FLAG`       | Unconfirmed remarks-speaker names — review pre-launch  |
 | `MAP IMPLEMENTATION`  | Optional 3-pin My Maps upgrade path                    |
@@ -46,4 +45,4 @@ republishes automatically in ~1 minute.
 - [ ] Official logo files + Moore acknowledgment language from grant office
 - [ ] Speaker list cleared for publication; remove Draft pill
 - [ ] PI eyeballs speaker affiliations
-- [ ] Confirm or delete Sophy hotel listing
+- [x] Confirm or delete Sophy hotel listing
